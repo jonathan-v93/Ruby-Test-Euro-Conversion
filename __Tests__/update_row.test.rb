@@ -1,9 +1,16 @@
-require_relative "../exchange_function"
+require_relative "../services/csv_service"
 require "test/unit"
+
+class MockAPI
+  def convert_value_to_euro(current_currency, current_value)
+    return 1
+  end
+end
 
 class TestUpdateRow < Test::Unit::TestCase
   def test_adds_extra_entries
-    exchange_function = ExchangeFunction.new()
+    mock_api = MockAPI.new()
+    exchange_function = CSVService.new(mock_api)
     input = {
       "testing1" => "123",
       "testing2" => "123",
@@ -13,7 +20,8 @@ class TestUpdateRow < Test::Unit::TestCase
   end
 
   def test_removes_unwanted_entries
-    exchange_function = ExchangeFunction.new()
+    mock_api = MockAPI.new()
+    exchange_function = CSVService.new(mock_api)
     input = {
       "testing1" => "123",
       "testing2" => "123",
@@ -27,7 +35,8 @@ class TestUpdateRow < Test::Unit::TestCase
   end
 
   def test_keeps_relevent_entries
-    exchange_function = ExchangeFunction.new()
+    mock_api = MockAPI.new()
+    exchange_function = CSVService.new(mock_api)
     input = {
       "id" => "1",
       "value" => "999",
@@ -40,7 +49,8 @@ class TestUpdateRow < Test::Unit::TestCase
   end
 
   def test_new_order_created
-    exchange_function = ExchangeFunction.new()
+    mock_api = MockAPI.new()
+    exchange_function = CSVService.new(mock_api)
     input = {
       "value" => "999",
       "currency" => "123",
