@@ -1,4 +1,4 @@
-*** Exchange Function ***
+*** Euro Conversion Test ***
 
 - Takes all CSV files in the "ToConvert" directory
 - Creates a new CSV file for each one in the "Converted" directory
